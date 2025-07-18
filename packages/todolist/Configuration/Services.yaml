@@ -1,0 +1,6 @@
+services:
+  Kkroff\Todolist\:
+    resource: '../Classes/*'
+    autowire: true
+    autoconfigure: true
+    public: false
