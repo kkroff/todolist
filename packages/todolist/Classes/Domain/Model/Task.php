@@ -14,16 +14,16 @@ use SourceBroker\T3api\Annotation\ApiResource;
  *          "get"={
  *              "method"="GET",
  *              "path"="/task",
- *          }
+ *          },
+ *          "post"={
+ *              "method"="POST",
+ *              "path"="/task",
+ *          },
  *     },
  *     itemOperations={
  *          "get"={
  *              "method"="GET",
  *              "path"="/task/{id}",
- *          },
- *          "post"={
- *               "method"="POST",
- *               "path"="/task",
  *          },
  *          "patch"={
  *               "method"="PATCH",
