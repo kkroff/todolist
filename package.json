@@ -10,6 +10,7 @@
     "vite-plugin-typo3": "^2.0.2"
   },
   "dependencies": {
-    "vue": "^3.5.17"
+    "vue": "^3.5.17",
+    "vue-router": "^4.0.3"
   }
 }

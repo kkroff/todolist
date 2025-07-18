@@ -1,0 +1,38 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #2F035D;
+}
+
+
+.card-body h1 {
+    color: #a813ff;
+}
+
+.btn-primary {
+    background-color: #a813ff;
+    border: transparent;
+}
+
+.btn-danger {
+    background-color: #5f8dba;
+    border: transparent;
+}
+
+.btn-warning {
+    background-color: #952b95;
+    color: #fff;
+    border: transparent;
+}
+
+.message {
+    color: green;
+    font-weight: bold;
+}
+
+.item-card {
+    height: 60px;
+    background-color: #440c7e;
+    color: #fff;
+}
