@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae023393096ad5d0026a92c1f1992e0e",
+    "content-hash": "ddb2eb063d972f528379495d89e9d6f3",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1136,6 +1136,41 @@
                 }
             ],
             "time": "2025-03-27T12:30:47+00:00"
+        },
+        {
+            "name": "kkroff/todolist",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./packages/todolist",
+                "reference": "6bc7e550159bd86fc8e31243ca504cceafb6a5c7"
+            },
+            "require": {
+                "typo3/cms-core": "^13.4",
+                "typo3/cms-fluid-styled-content": "^13.4",
+                "typo3/cms-rte-ckeditor": "^13.4"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "todolist"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kkroff\\Todolist\\": "Classes/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "homepage": "https://github.com/kkroff",
+            "keywords": [
+                "TYPO3 CMS"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "kkroff/todolist-site",
