@@ -16,6 +16,7 @@
 	"require": {
 		"kkroff/todolist": "1.0.0",
 		"kkroff/todolist-site": "1.0.0",
+		"sourcebroker/t3api": "^4.1",
 		"typo3/cms-backend": "^13.4",
 		"typo3/cms-belog": "^13.4",
 		"typo3/cms-beuser": "^13.4",
