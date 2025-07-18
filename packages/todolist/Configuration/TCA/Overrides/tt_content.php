@@ -1,7 +1,7 @@
 <?php
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-    ['Task List', 'todolist_tasks', 'EXT:todolist/Resources/Public/Icons/tx_todolist_task.svg'],
+    ['Task List', 'todolist_tasks', 'todolist-plugin-tasks'],
     'list_type',
     'todolist'
 );
