@@ -1,0 +1,24 @@
+{
+    "name": "kkroff/todolist-site",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "homepage": "https://github.com/kkroff",
+    "license": ["GPL-2.0-or-later"],
+    "version": "1.0.0",
+    "keywords": ["TYPO3 CMS"],
+    "require": {
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-rte-ckeditor": "^13.4",
+        "typo3/cms-fluid-styled-content": "^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kkroff\\TodolistSite\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "todolist_site"
+        }
+    }
+}
