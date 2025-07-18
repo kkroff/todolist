@@ -10,7 +10,8 @@
         "typo3/cms-core": "^13.4",
         "typo3/cms-rte-ckeditor": "^13.4",
         "typo3/cms-fluid-styled-content": "^13.4",
-        "sourcebroker/t3api": "^4.1"
+        "sourcebroker/t3api": "^4.1",
+        "praetorius/vite-asset-collector": "^1.14"
     },
     "autoload": {
         "psr-4": {

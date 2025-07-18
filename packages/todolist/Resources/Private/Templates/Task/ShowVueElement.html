@@ -1,4 +1,12 @@
+<html
+        data-namespace-typo3-fluid="true"
+        xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers"
+>
+
 <f:layout name="Default" />
 <f:section name="main">
-    <h1>Task List</h1>
+
+    <vite:asset entry="EXT:todolist/Resources/Private/Main.entry.js" />
+    <div id="app"></div>
+
 </f:section>
