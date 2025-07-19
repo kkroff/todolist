@@ -34,7 +34,7 @@
           <div class="card-body">
             <div class="d-flex align-items-start gap-3 flex-wrap flex-md-nowrap" v-if="!task.isEditing">
               <div class="pt-2">
-                <button class="done-button" :class="{ done: task.isDone }" @click="task.isDone = !task.isDone">
+                <button class="done-button" :class="{ done: task.isDone }" @click="toggleDoneAndSave(task)">
                   {{ task.isDone ? '✓' : '' }}
                 </button>
               </div>
@@ -140,10 +140,13 @@ export default {
       const payload = {
         title: newTaskTitle.value,
         description: newTaskDescription.value,
-        dueDate: newTaskDueDate.value || null,
+        dueDate: newTaskDueDate.value
+            ? formatDateForApi(newTaskDueDate.value)
+            : null,
         isDone: false,
         pid: PID
       }
+
 
       try {
         const response = await api.post('/task', payload)
@@ -210,17 +213,46 @@ export default {
       }
     }
 
-    const saveTask = (task) => {
-      task.title = task.editingValues.title;
-      task.description = task.editingValues.description;
-      task.dueDate = task.editingValues.dueDate;
-      task.isEditing = false;
-      delete task.editingValues;
-      saveTasksToStorage();
-    };
+    const saveTask = async (task) => {
+      const updatedFields = {
+        title: task.editingValues.title,
+        description: task.editingValues.description,
+        dueDate: task.editingValues.dueDate
+            ? formatDateForApi(task.editingValues.dueDate)
+            : null,
+        pid: PID
+      }
 
-    function saveTasksToStorage() {
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      try {
+        await api.patch(`/task/${task.uid}`, updatedFields)
+
+        task.title = updatedFields.title
+        task.description = updatedFields.description
+        task.dueDate = updatedFields.dueDate
+        task.isEditing = false
+        delete task.editingValues
+      } catch (err) {
+        console.error('saveTask error:', err)
+      }
+    }
+
+    const toggleDoneAndSave = async (task) => {
+      task.isDone = !task.isDone
+
+      const payload = {
+        title: task.title,
+        description: task.description,
+        dueDate: task.dueDate ? formatDateForApi(task.dueDate) : null,
+        isDone: task.isDone,
+        pid: PID
+      }
+
+      try {
+        await api.patch(`/task/${task.uid}`, payload)
+      } catch (err) {
+        console.error('toggleDone error:', err)
+        task.isDone = !task.isDone
+      }
     }
 
     const startEditing = (task) => {
@@ -264,6 +296,11 @@ export default {
       return new Date(date).toLocaleDateString('de-DE');
     }
 
+    function formatDateForApi(dateString) {
+      const date = new Date(dateString)
+      return date.toISOString()
+    }
+
     function isBeforeToday(date) {
       if (!date) return false;
       return new Date(date) < new Date(currentDate.value);
@@ -299,6 +336,7 @@ export default {
       deleteAllTasks,
       deleteCompletedTasks,
       saveTask,
+      toggleDoneAndSave,
       startEditing,
       cancelEditing,
       increaseDateBy1Day,
