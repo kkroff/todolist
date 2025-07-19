@@ -118,6 +118,22 @@ export default {
     const currentDateFormatted = computed(() => currentDate.value);
 
     // -- Task Actions --
+    onMounted(() => {
+      loadTasksFromApi();
+    });
+
+    async function loadTasksFromApi() {
+      try {
+        const response = await api.get('/task')
+        //console.log('response.data:', response.data)
+
+        tasks.value = response.data['hydra:member'] || response.data
+      } catch (error) {
+        console.error('loadTasksFromApi error:', error)
+      }
+    }
+
+
     const addTask = async () => {
       if (!newTaskTitle.value) return;
 
@@ -153,27 +169,45 @@ export default {
     const deleteTask = async (index) => {
       const task = tasks.value[index]
 
-      if (!task.id) {
-        console.warn('Task has no ID - cannot be deleted ')
+      if (!task.uid) {
+        console.warn('Task has no UID/ID - cannot be deleted ')
         return
       }
 
       try {
-        await api.delete(`/items/${task.id}`)
+        await api.delete(`/task/${task.uid}`)
         tasks.value.splice(index, 1)
       } catch (err) {
         console.error('deleteTask error:', err)
       }
     }
 
-    const deleteAllTasks = () => {
-      tasks.value = [];
-      localStorage.removeItem("tasks");
-    };
+    const deleteAllTasks = async () => {
+      try {
+        const deletions = tasks.value.map(task =>
+            api.delete(`/task/${task.uid}`)
+        )
 
-    function deleteCompletedTasks() {
-      tasks.value = tasks.value.filter(task => !task.isDone);
-      saveTasksToStorage();
+        await Promise.all(deletions)
+        tasks.value = []
+      } catch (err) {
+        console.error('deleteAllTasks error:', err)
+      }
+    }
+
+    const deleteCompletedTasks = async () => {
+      const completed = tasks.value.filter(task => task.isDone && task.uid)
+
+      try {
+        const deletions = completed.map(task =>
+            api.delete(`/task/${task.uid}`)
+        )
+
+        await Promise.all(deletions)
+        tasks.value = tasks.value.filter(task => !task.isDone)
+      } catch (err) {
+        console.error('deleteCompletedTasks error:', err)
+      }
     }
 
     const saveTask = (task) => {
@@ -244,19 +278,6 @@ export default {
           inputDate.getMonth() === today.getMonth() &&
           inputDate.getDate() === today.getDate()
       );
-    }
-
-    onMounted(() => {
-      loadTasksFromApi();
-    });
-
-    async function loadTasksFromApi() {
-      try {
-        const response = await api.get('/task')
-        tasks.value = response.data['hydra:member'] || response.data
-      } catch (error) {
-        console.error('loadTasksFromApi error:', error)
-      }
     }
 
     return {
