@@ -11,6 +11,7 @@
     "vite-plugin-typo3": "^2.0.2"
   },
   "dependencies": {
+    "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
     "vue": "^3.5.17"
   }

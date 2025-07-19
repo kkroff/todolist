@@ -72,9 +72,17 @@
 
 <script>
 import { ref, onMounted, computed } from "vue";
+import axios from 'axios'
 
 export default {
   setup() {
+    const api = axios.create({
+      baseURL: '/_api',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
     // -- UI Control --
     const isMenuOpen = ref(false);
     const currentDate = ref(new Date());
@@ -214,10 +222,17 @@ export default {
     }
 
     onMounted(() => {
-      if (localStorage.tasks) {
-        tasks.value = JSON.parse(localStorage.getItem("tasks")) || [];
-      }
+      loadTasksFromApi();
     });
+
+    async function loadTasksFromApi() {
+      try {
+        const response = await api.get('/task')
+        tasks.value = response.data['hydra:member'] || response.data
+      } catch (error) {
+        console.error('Fehler beim Laden der Aufgaben:', error)
+      }
+    }
 
     return {
       isMenuOpen,
