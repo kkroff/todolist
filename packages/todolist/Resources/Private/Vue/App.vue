@@ -1,86 +1,74 @@
-
-<!-- Html -->
 <template>
-  <div class="container d-flex justify-content-center align-items-center">
-    <div class="card mt-3 col-6">
-      <div class="card-body">
-        <h1 class="text-center">Task List</h1>
-        <div
-            class="d-flex flex-column flex-sm-row justify-content-between mt-3 mt-sm-5"
-        >
-          <div class="col-sm-9">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Add a new task..."
-                v-model="newTask"
-                @keyup.enter="addTask"
-                :disabled="tasks.length > 4"
-            />
+  <div>
+    <button class="menu-toggle" @click="isMenuOpen = !isMenuOpen"></button>
+
+    <div v-if="isMenuOpen" class="floating-menu">
+      <h3>{{ formatDate(formattedDate) }}</h3>
+      <button @click="decreaseDateBy1Day">- 1 Tag</button>
+      <button @click="increaseDateBy1Day">+ 1 Tag</button>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-sm-10 task-form-box">
+        <div class="row g-2">
+          <div class="col-sm-10 d-flex flex-column gap-2">
+            <input type="text" class="form-control" placeholder="Titel der Aufgabe" v-model="newTaskTitle" />
+            <input type="text" class="form-control" placeholder="Beschreibung hinzufügen" v-model="newTaskDescription" @keyup.enter="addTask" />
+            <input type="date" class="form-control" v-model="newTaskDueDate" />
           </div>
-          <div class="mt-3 mt-sm-0">
-            <button
-                type="button"
-                class="btn btn-primary"
-                @click="addTask"
-                v-if="tasks.length <= 4"
-            >
-              Add
-            </button>
-            <p v-else class="message">List completed</p>
+          <div class="col-sm-2 d-flex align-items-stretch">
+            <button type="button" class="btn btn-primary w-100 fw-bold fs-3" @click="addTask">+</button>
           </div>
         </div>
-        <div class="mt-3 mt-sm-5">
-          <div
-              class="card item-card mt-2"
-              v-for="(task, index) in tasks"
-              :key="index"
-          >
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    v-model="task.isDone"
-                />
-                <div>
-                  <p class="fw-semibold">{{ task.description }}</p>
-                </div>
-                <div>
-                  <button
-                      type="button"
-                      class="btn btn-danger"
-                      @click="deleteTask(index)"
-                  >
-                    Delete
-                  </button>
-                </div>
+      </div>
+
+      <div class="col-sm-10 task-list-box">
+        <h4>{{ pendingTasks }} offene ToDos</h4>
+
+        <div class="card item-card mt-3"
+             v-for="(task, index) in sortedTasks"
+             :key="index"
+             :class="getTaskClass(task)">
+          <div class="card-body">
+            <div class="d-flex align-items-start gap-3 flex-wrap flex-md-nowrap" v-if="!task.isEditing">
+              <div class="pt-2">
+                <button class="done-button" :class="{ done: task.isDone }" @click="task.isDone = !task.isDone">
+                  {{ task.isDone ? '✓' : '' }}
+                </button>
+              </div>
+
+              <div class="flex-grow-1">
+                <p class="fw-semibold mb-1">{{ task.title }}</p>
+                <p v-if="task.description" class="mb-1">{{ task.description }}</p>
+                <p v-if="task.dueDate">{{ formatDate(task.dueDate) }}</p>
+              </div>
+
+              <div class="d-flex flex-column gap-2">
+                <button class="btn btn-sm btn-outline-dark" @click="startEditing(task)">Bearbeiten</button>
+                <button class="btn btn-sm btn-outline-dark" @click="deleteTask(index)">Löschen</button>
               </div>
             </div>
-          </div>
-          <hr />
-          <div class="d-flex flex-column flex-sm-row justify-content-between">
-            <div>
-              <p class="fw-bold" v-show="pendingTasks > 0">
-                You have {{ pendingTasks }} pending tasks
-              </p>
-            </div>
-            <div>
-              <button
-                  type="button"
-                  class="btn btn-warning"
-                  @click="deleteAllTasks"
-                  v-show="tasks.length > 0"
-              >
-                Delete All
-              </button>
+
+            <div v-else>
+              <input v-model="task.title" class="form-control mb-2" placeholder="Titel" />
+              <input v-model="task.description" class="form-control mb-2" placeholder="Beschreibung" />
+              <input v-model="task.dueDate" type="date" class="form-control mb-3" />
+              <button class="btn btn-sm btn-outline-dark me-2" @click="saveTask(task, index)">Speichern</button>
+              <button class="btn btn-sm btn-outline-dark" @click="cancelEditing(task)">Abbrechen</button>
             </div>
           </div>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-end mt-3">
+          <button type="button" class="btn btn-primary" @click="deleteAllTasks" v-show="tasks.length > 0">Alle löschen</button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <!-- Javascript -->
 <script>
 import { ref, onMounted, computed, watch } from "vue";
@@ -88,20 +76,78 @@ import { ref, onMounted, computed, watch } from "vue";
 export default {
   name: "HomePage",
   setup() {
-    const newTask = ref("");
-    const tasks = ref([
-      { description: "Review pending activities", isDone: false },
-      { description: "Attend daily meetings", isDone: false },
-    ]);
+    const isMenuOpen = ref(false);
+
+    const newTaskTitle = ref("");
+    const newTaskDescription = ref("");
+    const newTaskDueDate = ref("");
+
+    const currentDate = ref(new Date());
+    const formattedDate = computed(() => currentDate.value);
+
+    const tasks = ref([]);
+
+
+    const sortedTasks = computed(() => {
+      return tasks.value.slice().sort((a, b) => {
+
+        if (!a.dueDate && !b.dueDate) return 0;
+
+        if (!a.dueDate) return 1;
+
+        if (!b.dueDate) return -1;
+
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      });
+    });
+
+
+    function getTaskClass(task) {
+      if (task.isDone) return 'done';
+      if (isTaskDueToday(task.dueDate)) return 'dueToday';
+      if (isTaskOverdue(task.dueDate)) return 'overdue';
+      return '';
+    }
+
+    const isTaskOverdue = (taskDate) => {
+      if (!taskDate) return false;
+      return new Date(taskDate) < new Date(currentDate.value);
+    };
+
+    const isTaskDueToday = (taskDate) => {
+      if (!taskDate) return false;
+      const today = new Date(currentDate.value);
+      const due = new Date(taskDate);
+
+      return (
+          due.getFullYear() === today.getFullYear() &&
+          due.getMonth() === today.getMonth() &&
+          due.getDate() === today.getDate()
+      );
+    };
 
     const addTask = () => {
-      if (!newTask.value) return;
+      console.log("Titel:", newTaskTitle.value);
+      console.log("Beschreibung:", newTaskDescription.value);
+      console.log("Fäligkeitsdatum", newTaskDueDate.value);
+
+      if (!newTaskTitle.value) return;
+
+      const dueDate = newTaskDueDate.value
+          ? newTaskDueDate.value
+          : null;
+
       tasks.value.unshift({
-        description: newTask.value,
+        title: newTaskTitle.value,
+        description: newTaskDescription.value,
+        dueDate: dueDate,
+        isEditing: false,
         isDone: false,
       });
       localStorage.setItem("tasks", JSON.stringify(tasks.value));
-      newTask.value = "";
+      newTaskTitle.value = "";
+      newTaskDescription.value = "";
+      newTaskDueDate.value = "";
     };
 
     const deleteTask = (index) => {
@@ -114,6 +160,36 @@ export default {
       localStorage.removeItem("tasks");
     };
 
+    const startEditing = (task) => {
+      task.isEditing = true;
+    };
+
+    const cancelEditing = (task) => {
+      task.isEditing = false;
+    };
+
+    const saveTask = (task) => {
+      task.isEditing = false;
+      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+    };
+
+    const increaseDateBy1Day = () => {
+      const newDate = new Date(currentDate.value);
+      newDate.setDate(newDate.getDate() + 1);
+      currentDate.value = newDate;
+    };
+
+    const decreaseDateBy1Day = () => {
+      const newDate = new Date(currentDate.value);
+      newDate.setDate(newDate.getDate() - 1);
+      currentDate.value = newDate;
+    };
+
+    function formatDate(date) {
+      if (!date) return '';
+      return new Date(date).toLocaleDateString('de-DE');
+    }
+
     const pendingTasks = computed(() => {
       return tasks.value.filter((x) => x.isDone === false).length;
     });
@@ -121,9 +197,6 @@ export default {
     watch(
         tasks,
         () => {
-          if (tasks.value.length > 4) {
-            alert('You have reached the maximum number of possible tasks (5)');
-          }
         },
         { deep: true }
     );
@@ -135,15 +208,28 @@ export default {
     });
 
     return {
-      newTask,
+      newTaskTitle,
+      newTaskDescription,
+      newTaskDueDate,
+      formattedDate,
       tasks,
+      sortedTasks,
+      pendingTasks,
+      isMenuOpen,
+      getTaskClass,
+      isTaskOverdue,
+      isTaskDueToday,
       addTask,
       deleteTask,
       deleteAllTasks,
-      pendingTasks,
+      increaseDateBy1Day,
+      decreaseDateBy1Day,
+      startEditing,
+      cancelEditing,
+      saveTask,
+      formatDate,
     };
   },
 };
 </script>
-
   
