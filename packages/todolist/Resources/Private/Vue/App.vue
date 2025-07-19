@@ -14,8 +14,8 @@
       <div class="col-sm-10 task-form-box">
         <div class="row g-2">
           <div class="col-sm-10 d-flex flex-column gap-2">
-            <input type="text" class="form-control" placeholder="Titel der Aufgabe" v-model="newTaskTitle" />
-            <input type="text" class="form-control" placeholder="Beschreibung hinzufügen" v-model="newTaskDescription" />
+            <input type="text" class="form-control" placeholder="Titel der Aufgabe" v-model="newTaskTitle" maxlength="255"/>
+            <input type="text" class="form-control" placeholder="Beschreibung hinzufügen" v-model="newTaskDescription" maxlength="255"/>
             <input type="date" class="form-control" v-model="newTaskDueDate" />
           </div>
           <div class="col-sm-2 d-flex align-items-stretch">
@@ -52,8 +52,8 @@
             </div>
 
             <div v-else>
-              <input v-model="task.editingValues.title" class="form-control mb-2" placeholder="Titel" />
-              <input v-model="task.editingValues.description" class="form-control mb-2" placeholder="Beschreibung" />
+              <input v-model="task.editingValues.title" class="form-control mb-2" placeholder="Titel" maxlength="255" />
+              <input v-model="task.editingValues.description" class="form-control mb-2" placeholder="Beschreibung" maxlength="255"/>
               <input v-model="task.editingValues.dueDate" type="date" class="form-control mb-3" />
               <button class="btn btn-sm btn-outline-dark me-2" @click="saveTask(task)">Speichern</button>
               <button class="btn btn-sm btn-outline-dark" @click="cancelEditing(task)">Abbrechen</button>
