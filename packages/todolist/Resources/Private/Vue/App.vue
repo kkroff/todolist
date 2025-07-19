@@ -52,9 +52,9 @@
             </div>
 
             <div v-else>
-              <input v-model="task.title" class="form-control mb-2" placeholder="Titel" />
-              <input v-model="task.description" class="form-control mb-2" placeholder="Beschreibung" />
-              <input v-model="task.dueDate" type="date" class="form-control mb-3" />
+              <input v-model="task.editingValues.title" class="form-control mb-2" placeholder="Titel" />
+              <input v-model="task.editingValues.description" class="form-control mb-2" placeholder="Beschreibung" />
+              <input v-model="task.editingValues.dueDate" type="date" class="form-control mb-3" />
               <button class="btn btn-sm btn-outline-dark me-2" @click="saveTask(task, index)">Speichern</button>
               <button class="btn btn-sm btn-outline-dark" @click="cancelEditing(task)">Abbrechen</button>
             </div>
@@ -69,24 +69,25 @@
   </div>
 </template>
 
-<!-- Javascript -->
 <script>
 import { ref, onMounted, computed, watch } from "vue";
 
 export default {
   name: "HomePage",
   setup() {
+    //UI Control
     const isMenuOpen = ref(false);
+    const currentDate = ref(new Date());
 
+    //Form binding
     const newTaskTitle = ref("");
     const newTaskDescription = ref("");
     const newTaskDueDate = ref("");
 
-    const currentDate = ref(new Date());
     const formattedDate = computed(() => currentDate.value);
 
-    const tasks = ref([]);
 
+    const tasks = ref([]);
 
     const sortedTasks = computed(() => {
       return tasks.value.slice().sort((a, b) => {
@@ -104,33 +105,28 @@ export default {
 
     function getTaskClass(task) {
       if (task.isDone) return 'done';
-      if (isTaskDueToday(task.dueDate)) return 'dueToday';
-      if (isTaskOverdue(task.dueDate)) return 'overdue';
+      if (isToday(task.dueDate)) return 'dueToday';
+      if (isBeforeToday(task.dueDate)) return 'overdue';
       return '';
     }
 
-    const isTaskOverdue = (taskDate) => {
-      if (!taskDate) return false;
-      return new Date(taskDate) < new Date(currentDate.value);
-    };
+    function isBeforeToday(date) {
+      if (!date) return false;
+      return new Date(date) < new Date(currentDate.value);
+    }
 
-    const isTaskDueToday = (taskDate) => {
-      if (!taskDate) return false;
+    function isToday(date) {
+      if (!date) return false;
       const today = new Date(currentDate.value);
-      const due = new Date(taskDate);
-
+      const inputDate = new Date(date);
       return (
-          due.getFullYear() === today.getFullYear() &&
-          due.getMonth() === today.getMonth() &&
-          due.getDate() === today.getDate()
+          inputDate.getFullYear() === today.getFullYear() &&
+          inputDate.getMonth() === today.getMonth() &&
+          inputDate.getDate() === today.getDate()
       );
-    };
+    }
 
     const addTask = () => {
-      console.log("Titel:", newTaskTitle.value);
-      console.log("Beschreibung:", newTaskDescription.value);
-      console.log("Fäligkeitsdatum", newTaskDueDate.value);
-
       if (!newTaskTitle.value) return;
 
       const dueDate = newTaskDueDate.value
@@ -161,15 +157,25 @@ export default {
     };
 
     const startEditing = (task) => {
+      task.editingValues = {
+        title: task.title,
+        description: task.description,
+        dueDate: task.dueDate
+      };
       task.isEditing = true;
     };
 
     const cancelEditing = (task) => {
       task.isEditing = false;
+      delete task.editingValues;
     };
 
     const saveTask = (task) => {
+      task.title = task.editingValues.title;
+      task.description = task.editingValues.description;
+      task.dueDate = task.editingValues.dueDate;
       task.isEditing = false;
+      delete task.editingValues;
       localStorage.setItem("tasks", JSON.stringify(tasks.value));
     };
 
@@ -194,13 +200,6 @@ export default {
       return tasks.value.filter((x) => x.isDone === false).length;
     });
 
-    watch(
-        tasks,
-        () => {
-        },
-        { deep: true }
-    );
-
     onMounted(() => {
       if (localStorage.tasks) {
         tasks.value = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -217,8 +216,6 @@ export default {
       pendingTasks,
       isMenuOpen,
       getTaskClass,
-      isTaskOverdue,
-      isTaskDueToday,
       addTask,
       deleteTask,
       deleteAllTasks,
@@ -232,4 +229,3 @@ export default {
   },
 };
 </script>
-  
