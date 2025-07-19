@@ -55,13 +55,14 @@
               <input v-model="task.editingValues.title" class="form-control mb-2" placeholder="Titel" />
               <input v-model="task.editingValues.description" class="form-control mb-2" placeholder="Beschreibung" />
               <input v-model="task.editingValues.dueDate" type="date" class="form-control mb-3" />
-              <button class="btn btn-sm btn-outline-dark me-2" @click="saveTask(task, index)">Speichern</button>
+              <button class="btn btn-sm btn-outline-dark me-2" @click="saveTask(task)">Speichern</button>
               <button class="btn btn-sm btn-outline-dark" @click="cancelEditing(task)">Abbrechen</button>
             </div>
           </div>
         </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-end mt-3">
+          <button type="button" class="btn btn-primary me-2" @click="deleteCompletedTasks" v-show="tasks.length > 0">Alle Erledigten löschen</button>
           <button type="button" class="btn btn-primary" @click="deleteAllTasks" v-show="tasks.length > 0">Alle löschen</button>
         </div>
       </div>
@@ -70,7 +71,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 export default {
   setup() {
@@ -129,7 +130,7 @@ export default {
 
     const deleteTask = (index) => {
       tasks.value.splice(index, 1);
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      saveTasksToStorage();
     };
 
     const deleteAllTasks = () => {
@@ -137,14 +138,23 @@ export default {
       localStorage.removeItem("tasks");
     };
 
+    function deleteCompletedTasks() {
+      tasks.value = tasks.value.filter(task => !task.isDone);
+      saveTasksToStorage();
+    }
+
     const saveTask = (task) => {
       task.title = task.editingValues.title;
       task.description = task.editingValues.description;
       task.dueDate = task.editingValues.dueDate;
       task.isEditing = false;
       delete task.editingValues;
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      saveTasksToStorage();
     };
+
+    function saveTasksToStorage() {
+      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+    }
 
     const startEditing = (task) => {
       task.editingValues = {
@@ -222,10 +232,11 @@ export default {
       pendingTasks,
 
       formatToLocaleDate,
-      getTaskStatusClass,
+      getTaskCssClass,
       addTask,
       deleteTask,
       deleteAllTasks,
+      deleteCompletedTasks,
       saveTask,
       startEditing,
       cancelEditing,
