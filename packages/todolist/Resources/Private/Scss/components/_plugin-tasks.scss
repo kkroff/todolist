@@ -1,0 +1,30 @@
+.card-body h1 {
+  color: $secondary;
+}
+
+.btn-primary {
+  background-color: $secondary;
+  border: transparent;
+}
+
+.btn-danger {
+  background-color: $btn-danger;
+  border: transparent;
+}
+
+.btn-warning {
+  background-color: $btn-warning;
+  color: #fff;
+  border: transparent;
+}
+
+.message {
+  color: $secondary;
+  font-weight: bold;
+}
+
+.item-card {
+  height: 60px;
+  background-color: $primary;
+  color: #fff;
+}
