@@ -15,7 +15,7 @@
         <div class="row g-2">
           <div class="col-sm-10 d-flex flex-column gap-2">
             <input type="text" class="form-control" placeholder="Titel der Aufgabe" v-model="newTaskTitle" />
-            <input type="text" class="form-control" placeholder="Beschreibung hinzufügen" v-model="newTaskDescription" @keyup.enter="addTask" />
+            <input type="text" class="form-control" placeholder="Beschreibung hinzufügen" v-model="newTaskDescription" />
             <input type="date" class="form-control" v-model="newTaskDueDate" />
           </div>
           <div class="col-sm-2 d-flex align-items-stretch">
@@ -76,6 +76,8 @@ import axios from 'axios'
 
 export default {
   setup() {
+    const PID = 7;
+
     const api = axios.create({
       baseURL: '/_api',
       headers: {
@@ -116,30 +118,53 @@ export default {
     const currentDateFormatted = computed(() => currentDate.value);
 
     // -- Task Actions --
-    const addTask = () => {
+    const addTask = async () => {
       if (!newTaskTitle.value) return;
 
-      const dueDate = newTaskDueDate.value
-          ? newTaskDueDate.value
-          : null;
-
-      tasks.value.unshift({
+      const payload = {
         title: newTaskTitle.value,
         description: newTaskDescription.value,
-        dueDate: dueDate,
-        isEditing: false,
+        dueDate: newTaskDueDate.value || null,
         isDone: false,
-      });
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
-      newTaskTitle.value = "";
-      newTaskDescription.value = "";
-      newTaskDueDate.value = "";
+        pid: PID
+      }
+
+      try {
+        const response = await api.post('/task', payload)
+
+        //console.log('response.data:', response.data)
+
+        //import!! here we get uid of typo3 task object
+        const newTask = {
+          ...response.data,
+          isEditing: false
+        }
+
+        tasks.value.unshift(newTask)
+
+        newTaskTitle.value = ""
+        newTaskDescription.value = ""
+        newTaskDueDate.value = ""
+      } catch (error) {
+        console.error('addTask error:', error)
+      }
     };
 
-    const deleteTask = (index) => {
-      tasks.value.splice(index, 1);
-      saveTasksToStorage();
-    };
+    const deleteTask = async (index) => {
+      const task = tasks.value[index]
+
+      if (!task.id) {
+        console.warn('Task has no ID - cannot be deleted ')
+        return
+      }
+
+      try {
+        await api.delete(`/items/${task.id}`)
+        tasks.value.splice(index, 1)
+      } catch (err) {
+        console.error('deleteTask error:', err)
+      }
+    }
 
     const deleteAllTasks = () => {
       tasks.value = [];
@@ -230,7 +255,7 @@ export default {
         const response = await api.get('/task')
         tasks.value = response.data['hydra:member'] || response.data
       } catch (error) {
-        console.error('Fehler beim Laden der Aufgaben:', error)
+        console.error('loadTasksFromApi error:', error)
       }
     }
 
