@@ -3,7 +3,7 @@
     <button class="menu-toggle" @click="isMenuOpen = !isMenuOpen"></button>
 
     <div v-if="isMenuOpen" class="floating-menu">
-      <h3>{{ formatDate(formattedDate) }}</h3>
+      <h3>{{ formatToLocaleDate(currentDateFormatted) }}</h3>
       <button @click="decreaseDateBy1Day">- 1 Tag</button>
       <button @click="increaseDateBy1Day">+ 1 Tag</button>
     </div>
@@ -30,7 +30,7 @@
         <div class="card item-card mt-3"
              v-for="(task, index) in sortedTasks"
              :key="index"
-             :class="getTaskClass(task)">
+             :class="getTaskCssClass(task)">
           <div class="card-body">
             <div class="d-flex align-items-start gap-3 flex-wrap flex-md-nowrap" v-if="!task.isEditing">
               <div class="pt-2">
@@ -42,7 +42,7 @@
               <div class="flex-grow-1">
                 <p class="fw-semibold mb-1">{{ task.title }}</p>
                 <p v-if="task.description" class="mb-1">{{ task.description }}</p>
-                <p v-if="task.dueDate">{{ formatDate(task.dueDate) }}</p>
+                <p v-if="task.dueDate">{{ formatToLocaleDate(task.dueDate) }}</p>
               </div>
 
               <div class="d-flex flex-column gap-2">
@@ -73,22 +73,20 @@
 import { ref, onMounted, computed, watch } from "vue";
 
 export default {
-  name: "HomePage",
   setup() {
-    //UI Control
+    // -- UI Control --
     const isMenuOpen = ref(false);
     const currentDate = ref(new Date());
 
-    //Form binding
+    // -- Form binding --
     const newTaskTitle = ref("");
     const newTaskDescription = ref("");
     const newTaskDueDate = ref("");
 
-    const formattedDate = computed(() => currentDate.value);
-
-
     const tasks = ref([]);
 
+
+    // -- computed --
     const sortedTasks = computed(() => {
       return tasks.value.slice().sort((a, b) => {
 
@@ -102,30 +100,13 @@ export default {
       });
     });
 
+    const pendingTasks = computed(() => {
+      return tasks.value.filter((x) => x.isDone === false).length;
+    });
 
-    function getTaskClass(task) {
-      if (task.isDone) return 'done';
-      if (isToday(task.dueDate)) return 'dueToday';
-      if (isBeforeToday(task.dueDate)) return 'overdue';
-      return '';
-    }
+    const currentDateFormatted = computed(() => currentDate.value);
 
-    function isBeforeToday(date) {
-      if (!date) return false;
-      return new Date(date) < new Date(currentDate.value);
-    }
-
-    function isToday(date) {
-      if (!date) return false;
-      const today = new Date(currentDate.value);
-      const inputDate = new Date(date);
-      return (
-          inputDate.getFullYear() === today.getFullYear() &&
-          inputDate.getMonth() === today.getMonth() &&
-          inputDate.getDate() === today.getDate()
-      );
-    }
-
+    // -- Task Actions --
     const addTask = () => {
       if (!newTaskTitle.value) return;
 
@@ -156,6 +137,15 @@ export default {
       localStorage.removeItem("tasks");
     };
 
+    const saveTask = (task) => {
+      task.title = task.editingValues.title;
+      task.description = task.editingValues.description;
+      task.dueDate = task.editingValues.dueDate;
+      task.isEditing = false;
+      delete task.editingValues;
+      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+    };
+
     const startEditing = (task) => {
       task.editingValues = {
         title: task.title,
@@ -170,15 +160,15 @@ export default {
       delete task.editingValues;
     };
 
-    const saveTask = (task) => {
-      task.title = task.editingValues.title;
-      task.description = task.editingValues.description;
-      task.dueDate = task.editingValues.dueDate;
-      task.isEditing = false;
-      delete task.editingValues;
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
-    };
 
+    function getTaskCssClass(task) {
+      if (task.isDone) return 'done';
+      if (isToday(task.dueDate)) return 'dueToday';
+      if (isBeforeToday(task.dueDate)) return 'overdue';
+      return '';
+    }
+
+    // -- Date Control --
     const increaseDateBy1Day = () => {
       const newDate = new Date(currentDate.value);
       newDate.setDate(newDate.getDate() + 1);
@@ -191,14 +181,27 @@ export default {
       currentDate.value = newDate;
     };
 
-    function formatDate(date) {
+    // -- Helper --
+    function formatToLocaleDate(date) {
       if (!date) return '';
       return new Date(date).toLocaleDateString('de-DE');
     }
 
-    const pendingTasks = computed(() => {
-      return tasks.value.filter((x) => x.isDone === false).length;
-    });
+    function isBeforeToday(date) {
+      if (!date) return false;
+      return new Date(date) < new Date(currentDate.value);
+    }
+
+    function isToday(date) {
+      if (!date) return false;
+      const today = new Date(currentDate.value);
+      const inputDate = new Date(date);
+      return (
+          inputDate.getFullYear() === today.getFullYear() &&
+          inputDate.getMonth() === today.getMonth() &&
+          inputDate.getDate() === today.getDate()
+      );
+    }
 
     onMounted(() => {
       if (localStorage.tasks) {
@@ -207,24 +210,27 @@ export default {
     });
 
     return {
+      isMenuOpen,
+      currentDateFormatted,
+
       newTaskTitle,
       newTaskDescription,
       newTaskDueDate,
-      formattedDate,
+
       tasks,
       sortedTasks,
       pendingTasks,
-      isMenuOpen,
-      getTaskClass,
+
+      formatToLocaleDate,
+      getTaskStatusClass,
       addTask,
       deleteTask,
       deleteAllTasks,
-      increaseDateBy1Day,
-      decreaseDateBy1Day,
+      saveTask,
       startEditing,
       cancelEditing,
-      saveTask,
-      formatDate,
+      increaseDateBy1Day,
+      decreaseDateBy1Day,
     };
   },
 };
