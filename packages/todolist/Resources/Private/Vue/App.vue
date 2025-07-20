@@ -152,6 +152,12 @@
 <script>
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
+import {
+  formatDateForApi,
+  formatToLocaleDate,
+  isBeforeToday,
+  isToday
+} from './utils/date.js'
 
 export default {
   setup() {
@@ -359,35 +365,9 @@ export default {
     // -- Helper --
     function getTaskCssClass(task) {
       if (task.isDone) return "done";
-      if (isToday(task.dueDate)) return "due-today";
-      if (isBeforeToday(task.dueDate)) return "overdue";
+      if (isToday(task.dueDate,currentDate.value)) return "due-today";
+      if (isBeforeToday(task.dueDate,currentDate.value)) return "overdue";
       return "";
-    }
-
-    function formatToLocaleDate(date) {
-      if (!date) return "";
-      return new Date(date).toLocaleDateString("de-DE");
-    }
-
-    function formatDateForApi(dateString) {
-      const date = new Date(dateString);
-      return date.toISOString();
-    }
-
-    function isBeforeToday(date) {
-      if (!date) return false;
-      return new Date(date) < new Date(currentDate.value);
-    }
-
-    function isToday(date) {
-      if (!date) return false;
-      const today = new Date(currentDate.value);
-      const inputDate = new Date(date);
-      return (
-        inputDate.getFullYear() === today.getFullYear() &&
-        inputDate.getMonth() === today.getMonth() &&
-        inputDate.getDate() === today.getDate()
-      );
     }
 
     return {

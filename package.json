@@ -4,10 +4,12 @@
     "build": "vite build",
     "lint:js": "eslint packages/ --ext .js,.vue",
     "lint:scss": "stylelint 'packages/**/*.scss'",
-    "format": "prettier --write \"packages/**/*.{js,vue,ts,scss,json,md}\""
+    "format": "prettier --write \"packages/**/*.{js,vue,ts,scss,json,md}\"",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
+    "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^6.0.0",
     "eslint": "^9.31.0",
     "eslint-plugin-vue": "^10.3.0",
@@ -20,7 +22,9 @@
     "stylelint-scss": "^6.12.1",
     "vite": "^7.0.5",
     "vite-plugin-auto-origin": "^1.2.2",
-    "vite-plugin-typo3": "^2.0.2"
+    "vite-plugin-typo3": "^2.0.2",
+    "vitest": "^3.2.4",
+    "vue-test-utils": "^0.5.0"
   },
   "dependencies": {
     "axios": "^1.10.0",
