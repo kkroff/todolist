@@ -4,8 +4,4 @@ import vue from "@vitejs/plugin-vue"
 
 export default defineConfig({
     plugins: [vue(), typo3()],
-    build: {
-        outDir: "Public/Dist",
-        emptyOutDir: true,
-    },
 });
