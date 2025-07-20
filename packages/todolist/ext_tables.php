@@ -5,7 +5,7 @@ use TYPO3\CMS\Core\Imaging\IconRegistry;
 
 defined('TYPO3') or die('Access denied.');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_todolist_task');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_todolist_domain_model_task');
 
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(IconRegistry::class);
 

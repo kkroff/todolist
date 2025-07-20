@@ -5,10 +5,37 @@ declare(strict_types=1);
 namespace Kkroff\Todolist\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use SourceBroker\T3api\Annotation\ApiResource;
 
+/**
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={
+ *              "method"="GET",
+ *              "path"="/task",
+ *          },
+ *          "post"={
+ *              "method"="POST",
+ *              "path"="/task",
+ *          },
+ *     },
+ *     itemOperations={
+ *          "get"={
+ *              "method"="GET",
+ *              "path"="/task/{id}",
+ *          },
+ *          "patch"={
+ *               "method"="PATCH",
+ *               "path"="/task/{id}",
+ *           },
+ *           "delete"={
+ *               "method"="DELETE",
+ *               "path"="/task/{id}",
+ *           },
+ *     },
+ * )
+ */
 class Task extends AbstractEntity
 {
     #[Extbase\Validate(['validator' => 'StringLength', 'options' => ['maximum' => 255]])]

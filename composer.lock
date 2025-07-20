@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddb2eb063d972f528379495d89e9d6f3",
+    "content-hash": "f61f1327e10c96716a33721ce1188082",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -813,6 +813,66 @@
             "time": "2025-04-09T20:32:01+00:00"
         },
         {
+            "name": "goldspecdigital/oooas",
+            "version": "v2.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/goldspecdigital/oooas.git",
+                "reference": "072f8d9f6e75f68df28b148103b38fdf843467b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/goldspecdigital/oooas/zipball/072f8d9f6e75f68df28b148103b38fdf843467b2",
+                "reference": "072f8d9f6e75f68df28b148103b38fdf843467b2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "justinrainbow/json-schema": "^5.2",
+                "phpunit/phpunit": ">=7.3"
+            },
+            "suggest": {
+                "justinrainbow/json-schema": "Required to perform validation (^5.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GoldSpecDigital\\ObjectOrientedOAS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Inamdar",
+                    "email": "matt@goldspecdigital.com"
+                },
+                {
+                    "name": "Vladimir Yuldashev",
+                    "email": "vladimir.yuldashev@gmail.com"
+                }
+            ],
+            "description": "An object oriented approach to generating OpenAPI specs, implemented in PHP.",
+            "homepage": "https://github.com/goldspecdigital/oooas",
+            "keywords": [
+                "oas",
+                "openapi",
+                "php",
+                "swagger"
+            ],
+            "support": {
+                "issues": "https://github.com/goldspecdigital/oooas/issues",
+                "source": "https://github.com/goldspecdigital/oooas/tree/v2.10.0"
+            },
+            "time": "2022-07-20T09:57:04+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "7.9.3",
             "source": {
@@ -1138,14 +1198,181 @@
             "time": "2025-03-27T12:30:47+00:00"
         },
         {
+            "name": "jms/metadata",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/metadata.git",
+                "reference": "7ca240dcac0c655eb15933ee55736ccd2ea0d7a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/7ca240dcac0c655eb15933ee55736ccd2ea0d7a6",
+                "reference": "7ca240dcac0c655eb15933ee55736ccd2ea0d7a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "^1.0",
+                "doctrine/coding-standard": "^8.0",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpunit/phpunit": "^8.5|^9.0",
+                "psr/container": "^1.0|^2.0",
+                "symfony/cache": "^3.1|^4.0|^5.0",
+                "symfony/dependency-injection": "^3.1|^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Metadata\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
+                }
+            ],
+            "description": "Class/method/property metadata management in PHP",
+            "keywords": [
+                "annotations",
+                "metadata",
+                "xml",
+                "yaml"
+            ],
+            "support": {
+                "issues": "https://github.com/schmittjoh/metadata/issues",
+                "source": "https://github.com/schmittjoh/metadata/tree/2.8.0"
+            },
+            "time": "2023-02-15T13:44:18+00:00"
+        },
+        {
+            "name": "jms/serializer",
+            "version": "3.32.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/serializer.git",
+                "reference": "7c88b1b02ff868eecc870eeddbb3b1250e4bd89c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/7c88b1b02ff868eecc870eeddbb3b1250e4bd89c",
+                "reference": "7c88b1b02ff868eecc870eeddbb3b1250e4bd89c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/instantiator": "^1.3.1 || ^2.0",
+                "doctrine/lexer": "^2.0 || ^3.0",
+                "jms/metadata": "^2.6",
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpdoc-parser": "^1.20 || ^2.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.14 || ^2.0",
+                "doctrine/coding-standard": "^12.0",
+                "doctrine/orm": "^2.14 || ^3.0",
+                "doctrine/persistence": "^2.5.2 || ^3.0",
+                "doctrine/phpcr-odm": "^1.5.2 || ^2.0",
+                "ext-pdo_sqlite": "*",
+                "jackalope/jackalope-doctrine-dbal": "^1.3",
+                "ocramius/proxy-manager": "^1.0 || ^2.0",
+                "phpbench/phpbench": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^9.0 || ^10.0 || ^11.0",
+                "psr/container": "^1.0 || ^2.0",
+                "rector/rector": "^1.0.0 || ^2.0@dev",
+                "slevomat/coding-standard": "dev-master#f2cc4c553eae68772624ffd7dd99022343b69c31 as 8.11.9999",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+                "symfony/expression-language": "^5.4 || ^6.0 || ^7.0",
+                "symfony/filesystem": "^5.4 || ^6.0 || ^7.0",
+                "symfony/form": "^5.4 || ^6.0 || ^7.0",
+                "symfony/translation": "^5.4 || ^6.0 || ^7.0",
+                "symfony/uid": "^5.4 || ^6.0 || ^7.0",
+                "symfony/validator": "^5.4 || ^6.0 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.0 || ^7.0",
+                "twig/twig": "^1.34 || ^2.4 || ^3.0"
+            },
+            "suggest": {
+                "doctrine/collections": "Required if you like to use doctrine collection types as ArrayCollection.",
+                "symfony/cache": "Required if you like to use cache functionality.",
+                "symfony/uid": "Required if you'd like to serialize UID objects.",
+                "symfony/yaml": "Required if you'd like to use the YAML metadata format."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JMS\\Serializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
+                }
+            ],
+            "description": "Library for (de-)serializing data of any complexity; supports XML, and JSON.",
+            "homepage": "http://jmsyst.com/libs/serializer",
+            "keywords": [
+                "deserialization",
+                "jaxb",
+                "json",
+                "serialization",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/schmittjoh/serializer/issues",
+                "source": "https://github.com/schmittjoh/serializer/tree/3.32.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/goetas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/scyzoryck",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-05-26T15:55:41+00:00"
+        },
+        {
             "name": "kkroff/todolist",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "./packages/todolist",
-                "reference": "6bc7e550159bd86fc8e31243ca504cceafb6a5c7"
+                "reference": "531a8b85edc1830b6c5d3af4a18ff4937b05d139"
             },
             "require": {
+                "sourcebroker/t3api": "^4.1",
                 "typo3/cms-core": "^13.4",
                 "typo3/cms-fluid-styled-content": "^13.4",
                 "typo3/cms-rte-ckeditor": "^13.4"
@@ -1618,6 +1845,66 @@
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/1.33.0"
             },
             "time": "2024-10-13T11:25:22+00:00"
+        },
+        {
+            "name": "praetorius/vite-asset-collector",
+            "version": "1.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/s2b/vite-asset-collector.git",
+                "reference": "f98056fb332e89d65f08507f557a4cf636acf9e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/s2b/vite-asset-collector/zipball/f98056fb332e89d65f08507f557a4cf636acf9e4",
+                "reference": "f98056fb332e89d65f08507f557a4cf636acf9e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/console": "^6.4 || ^7.0",
+                "typo3/class-alias-loader": "^1.0",
+                "typo3/cms-core": "^13.4 || ^12.4 || dev-main",
+                "typo3/cms-fluid": "^13.4 || ^12.4 || dev-main"
+            },
+            "require-dev": {
+                "editorconfig-checker/editorconfig-checker": "^10.6",
+                "phpstan/phpstan": "^1.12",
+                "phpunit/phpunit": "^11.4 || ^10.5",
+                "saschaegerer/phpstan-typo3": "^1.10",
+                "typo3/coding-standards": "^0.8",
+                "typo3/testing-framework": "^8.0 || dev-main"
+            },
+            "suggest": {
+                "t3docs/fluid-documentation-generator": "To update ViewHelper documentation with doc:viewhelpers"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "web-dir": ".Build/web",
+                    "extension-key": "vite_asset_collector"
+                },
+                "typo3/class-alias-loader": {
+                    "class-alias-maps": [
+                        "Migrations/Code/ClassAliasMap.php"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Praetorius\\ViteAssetCollector\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Use AssetCollector to embed frontend assets generated by vite",
+            "support": {
+                "issues": "https://github.com/s2b/vite-asset-collector/issues",
+                "source": "https://github.com/s2b/vite-asset-collector/tree/1.14.0"
+            },
+            "time": "2025-02-18T09:35:58+00:00"
         },
         {
             "name": "psr/cache",
@@ -2185,6 +2472,84 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "sourcebroker/t3api",
+            "version": "4.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sourcebroker/t3api.git",
+                "reference": "70b74942e7d77c4282f41f0e8a5e04ff47d7eaae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sourcebroker/t3api/zipball/70b74942e7d77c4282f41f0e8a5e04ff47d7eaae",
+                "reference": "70b74942e7d77c4282f41f0e8a5e04ff47d7eaae",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "^1.13.3 || ^2.0",
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "ext-tokenizer": "*",
+                "goldspecdigital/oooas": "^2.4",
+                "jms/serializer": "^3.1",
+                "php": "^8.1.0",
+                "phpdocumentor/reflection-docblock": "^5.2",
+                "symfony/cache": "^6.4 || ^7.0",
+                "symfony/expression-language": "^6.4 || ^7.0",
+                "symfony/http-foundation": "^6.4 || ^7.0",
+                "symfony/mime": "^6.4 || ^7.0",
+                "symfony/property-info": "^6.4 || ^7.0",
+                "symfony/psr-http-message-bridge": "^6.4 || ^7.0",
+                "symfony/routing": "^6.4 || ^7.0",
+                "typo3/cms-core": "^12.4.16 || ^13.3",
+                "typo3/cms-extbase": "^12.4.16 || ^13.3",
+                "typo3/cms-frontend": "^12.4.16 || ^13.3"
+            },
+            "replace": {
+                "typo3-ter/t3api": "self.version"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.47.0",
+                "friendsofphp/php-cs-fixer": "^3.75.0",
+                "phpstan/extension-installer": "^1.2.0",
+                "phpstan/phpstan": "^1.12.26",
+                "saschaegerer/phpstan-typo3": "~1.10.2",
+                "seld/jsonlint": "^1.11.0",
+                "symfony/yaml": "^6.0 || ^7.0",
+                "typo3/cms-install": "^12.4.16 || ^13.3",
+                "typo3/coding-standards": "^0.8",
+                "typo3/testing-framework": "^8.2.1"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "web-dir": ".Build/public",
+                    "extension-key": "t3api"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SourceBroker\\T3api\\": "Classes"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Inscript Team",
+                    "role": "Developer"
+                }
+            ],
+            "description": "REST API for your TYPO3 project. Config with annotations, build in filtering, pagination, typolinks, image processing, serialization contexts, responses in Hydra/JSON-LD format.",
+            "support": {
+                "issues": "https://github.com/sourcebroker/t3api/issues",
+                "source": "https://github.com/sourcebroker/t3api/tree/4.1.2"
+            },
+            "time": "2025-06-16T20:51:47+00:00"
         },
         {
             "name": "symfony/cache",
@@ -4350,6 +4715,89 @@
                 }
             ],
             "time": "2025-06-27T19:55:54+00:00"
+        },
+        {
+            "name": "symfony/psr-http-message-bridge",
+            "version": "v7.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/psr-http-message-bridge.git",
+                "reference": "03f2f72319e7acaf2a9f6fcbe30ef17eec51594f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/03f2f72319e7acaf2a9f6fcbe30ef17eec51594f",
+                "reference": "03f2f72319e7acaf2a9f6fcbe30ef17eec51594f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "psr/http-message": "^1.0|^2.0",
+                "symfony/http-foundation": "^6.4|^7.0"
+            },
+            "conflict": {
+                "php-http/discovery": "<1.15",
+                "symfony/http-kernel": "<6.4"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.1",
+                "php-http/discovery": "^1.15",
+                "psr/log": "^1.1.4|^2|^3",
+                "symfony/browser-kit": "^6.4|^7.0",
+                "symfony/config": "^6.4|^7.0",
+                "symfony/event-dispatcher": "^6.4|^7.0",
+                "symfony/framework-bundle": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\PsrHttpMessage\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "PSR HTTP message bridge",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v7.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-26T08:57:56+00:00"
         },
         {
             "name": "symfony/rate-limiter",
