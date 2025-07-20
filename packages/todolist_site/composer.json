@@ -3,9 +3,13 @@
     "type": "typo3-cms-extension",
     "description": "",
     "homepage": "https://github.com/kkroff",
-    "license": ["GPL-2.0-or-later"],
+    "license": [
+        "GPL-2.0-or-later"
+    ],
     "version": "1.0.0",
-    "keywords": ["TYPO3 CMS"],
+    "keywords": [
+        "TYPO3 CMS"
+    ],
     "require": {
         "typo3/cms-core": "^13.4",
         "typo3/cms-rte-ckeditor": "^13.4",
