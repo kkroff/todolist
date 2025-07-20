@@ -53,7 +53,7 @@
         >
           <div class="card-body">
             <div
-                class="d-flex flex-column flex-md-row gap-3 p-3 border rounded bg-light mb-3"
+                class="d-flex flex-column flex-md-row gap-3 p-3 mb-3"
                 v-if="!task.isEditing"
             >
               <!-- Toggle Done Button -->
