@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kkroff\Todolist\Domain\Model;
 
+use SourceBroker\T3api\Annotation\ApiResource;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use SourceBroker\T3api\Annotation\ApiResource;
 
 /**
  * @ApiResource(
