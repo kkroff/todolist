@@ -24,17 +24,15 @@
 }
 
 .overdue {
-  background-color: #f88b8b !important;
+  background-color: $overdue;
 }
 
 .due-today {
-  background-color: #ffcbcd !important;
-  color: black;
+  background-color: $due-today;
 }
 
 .done {
-  background-color: #96ed86 !important;
-  color: black;
+  background-color: $done;
 }
 
 .done-button {

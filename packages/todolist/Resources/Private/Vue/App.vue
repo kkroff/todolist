@@ -53,42 +53,45 @@
         >
           <div class="card-body">
             <div
-              class="d-flex align-items-start gap-3 flex-wrap flex-md-nowrap"
-              v-if="!task.isEditing"
+                class="d-flex flex-column flex-md-row gap-3 p-3 border rounded bg-light mb-3"
+                v-if="!task.isEditing"
             >
-              <div class="pt-2">
+              <!-- Toggle Done Button -->
+              <div class="align-self-start">
                 <button
-                  class="done-button"
-                  :class="{ done: task.isDone }"
-                  @click="toggleDoneAndSave(task)"
+                    class="done-button"
+                    :class="{ done: task.isDone }"
+                    @click="toggleDoneAndSave(task)"
                 >
                   {{ task.isDone ? "✓" : "" }}
                 </button>
               </div>
 
-              <div class="flex-grow-1">
+              <!-- Task Content -->
+              <div class="flex-grow-1 text-break">
                 <h4 class="fw-semibold mb-1">{{ task.title }}</h4>
-                <p v-if="task.description" class="mb-1">
-                  {{ task.description }}
-                </p>
-                <p v-if="task.dueDate">
+                <p v-if="task.description" class="mb-1">{{ task.description }}</p>
+                <p v-if="task.dueDate" class="mb-0 text-muted small">
                   {{ formatToLocaleDate(task.dueDate) }}
                 </p>
               </div>
 
-              <div class="d-flex flex-column gap-2">
-                <button
-                  class="btn btn-sm btn-outline-dark"
-                  @click="startEditing(task)"
-                >
-                  Bearbeiten
-                </button>
-                <button
-                  class="btn btn-sm btn-outline-dark"
-                  @click="deleteTask(index)"
-                >
-                  Löschen
-                </button>
+              <!-- Action Buttons -->
+              <div class="d-flex flex-column flex-md-column align-items-center align-items-md-end mt-3 mt-md-0">
+                <div class="d-flex flex-row flex-md-column gap-2">
+                  <button
+                      class="btn btn-sm btn-outline-dark"
+                      @click="startEditing(task)"
+                  >
+                    Bearbeiten
+                  </button>
+                  <button
+                      class="btn btn-sm btn-outline-dark"
+                      @click="deleteTask(index)"
+                  >
+                    Löschen
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -126,20 +129,20 @@
           </div>
         </div>
 
-        <div class="d-flex flex-column flex-sm-row justify-content-end mt-3">
+        <div class="d-flex flex-wrap gap-2 justify-content-end mt-3">
           <button
-            type="button"
-            class="btn btn-primary me-2"
-            @click="deleteCompletedTasks"
-            v-show="tasks.length > 0"
+              type="button"
+              class="btn btn-primary flex-grow-1 flex-sm-grow-0"
+              @click="deleteCompletedTasks"
+              v-show="tasks.length > 0"
           >
             Alle Erledigten löschen
           </button>
           <button
-            type="button"
-            class="btn btn-primary"
-            @click="deleteAllTasks"
-            v-show="tasks.length > 0"
+              type="button"
+              class="btn btn-primary flex-grow-1 flex-sm-grow-0"
+              @click="deleteAllTasks"
+              v-show="tasks.length > 0"
           >
             Alle löschen
           </button>
