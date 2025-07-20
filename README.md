@@ -16,23 +16,15 @@ Dieses Projekt ist eine Beispiel-Anwendung zur Verwaltung von Aufgaben (Tasks) m
 
 # Technologien
 
-- TYPO3 v13 (Composer-Installation)
+- DDEV
+- TYPO3 v13
 - Vite, Vue 3, Axios
 - REST API via [t3api](https://extensions.typo3.org/extension/t3api)
 - Asset Management via [vite_asset_collector](https://extensions.typo3.org/extension/vite_asset_collector)
-- DDEV für lokale Container-Entwicklung
 - Codequalität:
   - PHP: PHP-CS-Fixer, PHPStan
   - JS/SCSS: ESLint, Prettier, Stylelint
   - Testing: Vitest (unit tests)
-
-# Features (Frontend)
-- Aufgaben anzeigen, erstellen, bearbeiten und löschen
--	Aufgaben als erledigt markieren
-- Aufgaben nach Fälligkeitsdatum sortiert
--	Bearbeiten mit “Speichern” & “Abbrechen”
--	Datumsauswahl & Navigation über aktuelle Ansicht
--	Responsive & einfache Benutzeroberfläche mit Vue 3
 
 # Ausbaumöglichkeiten
 - Accountgebundene ToDo-Listen (z. B. pro Frontend-Benutzer)
