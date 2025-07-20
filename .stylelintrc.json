@@ -1,0 +1,11 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "block-no-empty": true,
+    "color-hex-length": "short",
+    "declaration-colon-space-after": "always",
+    "max-nesting-depth": 3,
+    "at-rule-empty-line-before": null
+
+  }
+}

@@ -284,7 +284,7 @@ export default {
     // -- Helper --
     function getTaskCssClass(task) {
       if (task.isDone) return 'done';
-      if (isToday(task.dueDate)) return 'dueToday';
+      if (isToday(task.dueDate)) return 'due-today';
       if (isBeforeToday(task.dueDate)) return 'overdue';
       return '';
     }
