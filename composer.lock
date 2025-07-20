@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58307e15a84cf14172af50e64f9bb81e",
+    "content-hash": "99f7b2638d2c6a39d4c4415876ce4f8a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -7408,6 +7408,63 @@
     ],
     "packages-dev": [
         {
+            "name": "bnf/phpstan-psr-container",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bnf/phpstan-psr-container.git",
+                "reference": "2e2fd1973576bdc755ea814b2142fcdbc673fd1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bnf/phpstan-psr-container/zipball/2e2fd1973576bdc755ea814b2142fcdbc673fd1c",
+                "reference": "2e2fd1973576bdc755ea814b2142fcdbc673fd1c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0",
+                "phpstan/phpstan": "^1.0|^2.0",
+                "psr/container": "^1.0|^2.0"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bnf\\PhpstanPsrContainer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Franzke",
+                    "email": "benjaminfranzke@gmail.com",
+                    "homepage": "https://bnfr.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPStan dynamic return type extension for PSR-11 ContainerInterface",
+            "keywords": [
+                "PHPStan",
+                "PSR-11",
+                "service-provider",
+                "static"
+            ],
+            "support": {
+                "issues": "https://github.com/bnf/phpstan-psr-container/issues",
+                "source": "https://github.com/bnf/phpstan-psr-container/tree/1.1.0"
+            },
+            "time": "2024-11-19T16:16:59+00:00"
+        },
+        {
             "name": "clue/ndjson-react",
             "version": "v1.3.0",
             "source": {
@@ -7909,6 +7966,159 @@
                 }
             ],
             "time": "2025-07-15T18:21:57+00:00"
+        },
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.1.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee1f390b7a70cdf74a2b737e554f68afea885db7",
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-17T17:22:31+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-deprecation-rules",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
+                "reference": "468e02c9176891cc901143da118f09dc9505fc2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/468e02c9176891cc901143da118f09dc9505fc2f",
+                "reference": "468e02c9176891cc901143da118f09dc9505fc2f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.1.15"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "rules.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
+                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/2.0.3"
+            },
+            "time": "2025-05-14T10:56:57+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-strict-rules",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-strict-rules.git",
+                "reference": "3e139cbe67fafa3588e1dbe27ca50f31fdb6236a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/3e139cbe67fafa3588e1dbe27ca50f31fdb6236a",
+                "reference": "3e139cbe67fafa3588e1dbe27ca50f31fdb6236a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0.4"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "rules.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Extra strict and opinionated rules for PHPStan",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.4"
+            },
+            "time": "2025-03-18T11:42:40+00:00"
         },
         {
             "name": "react/cache",
@@ -8437,6 +8647,76 @@
             "time": "2024-06-11T12:45:25+00:00"
         },
         {
+            "name": "saschaegerer/phpstan-typo3",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sascha-egerer/phpstan-typo3.git",
+                "reference": "c6c2a903c654c081436899dabfe991af00305267"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sascha-egerer/phpstan-typo3/zipball/c6c2a903c654c081436899dabfe991af00305267",
+                "reference": "c6c2a903c654c081436899dabfe991af00305267",
+                "shasum": ""
+            },
+            "require": {
+                "bnf/phpstan-psr-container": "^1.0",
+                "composer/semver": "^3.4",
+                "ext-simplexml": "*",
+                "php": "^8.2",
+                "phpstan/phpstan": "^2.1",
+                "ssch/typo3-debug-dump-pass": "^0.0.2",
+                "typo3/cms-core": "^13.4.3",
+                "typo3/cms-extbase": "^13.4.3"
+            },
+            "require-dev": {
+                "consistence-community/coding-standard": "^3.11",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phing/phing": "^2.17",
+                "php-parallel-lint/php-parallel-lint": "^1.4",
+                "phpstan/phpstan-phpunit": "^2.0.3",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^11.5"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SaschaEgerer\\PhpstanTypo3\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "TYPO3 CMS class reflection extension for PHPStan",
+            "keywords": [
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/sascha-egerer/phpstan-typo3/issues",
+                "source": "https://github.com/sascha-egerer/phpstan-typo3/tree/2.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sascha-egerer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sascha.egerer",
+                    "type": "liberapay"
+                }
+            ],
+            "time": "2025-03-28T13:49:31+00:00"
+        },
+        {
             "name": "sebastian/diff",
             "version": "6.0.2",
             "source": {
@@ -8502,6 +8782,64 @@
                 }
             ],
             "time": "2024-07-03T04:53:05+00:00"
+        },
+        {
+            "name": "ssch/typo3-debug-dump-pass",
+            "version": "v0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabbelasichon/typo3-debug-dump-pass.git",
+                "reference": "44776b48e78e50db999370dc65f85872420b4e79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabbelasichon/typo3-debug-dump-pass/zipball/44776b48e78e50db999370dc65f85872420b4e79",
+                "reference": "44776b48e78e50db999370dc65f85872420b4e79",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/config": "^5.0 || ^6.0 || ^7.0",
+                "symfony/dependency-injection": "^5.0 || ^6.0 || ^7.0",
+                "typo3/cms-core": "^10.4 || ^11.5 || ^12.4 || ^13.0"
+            },
+            "require-dev": {
+                "symplify/easy-coding-standard": "^12.1"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "web-dir": ".Build/Web",
+                    "extension-key": "typo3_debug_dump_pass"
+                },
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ssch\\Typo3DebugDumpPass\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Schreiber",
+                    "email": "me@schreibersebastian.de"
+                }
+            ],
+            "description": "Add debug dump compiler pass for better static analysis",
+            "keywords": [
+                "dev",
+                "refactoring"
+            ],
+            "support": {
+                "issues": "https://github.com/sabbelasichon/typo3-debug-dump-pass/issues",
+                "source": "https://github.com/sabbelasichon/typo3-debug-dump-pass/tree/v0.0.2"
+            },
+            "time": "2024-02-05T19:24:11+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
