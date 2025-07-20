@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="container text-center">
+  <div class="container px-2 text-center">
     <div class="row justify-content-center">
       <div class="col-sm-10 task-form-box">
         <div class="row g-2">
