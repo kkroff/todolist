@@ -76,7 +76,7 @@ import axios from 'axios'
 
 export default {
   setup() {
-    const PID = 7;
+    const PID = 7; //TYPO3 PID
 
     const api = axios.create({
       baseURL: '/_api',
@@ -117,7 +117,7 @@ export default {
 
     const currentDateFormatted = computed(() => currentDate.value);
 
-    // -- Task Actions --
+    // -- API Task Actions --
     onMounted(() => {
       loadTasksFromApi();
     });
@@ -150,7 +150,6 @@ export default {
 
       try {
         const response = await api.post('/task', payload)
-
         //console.log('response.data:', response.data)
 
         //import!! here we get uid of typo3 task object
@@ -269,14 +268,6 @@ export default {
       delete task.editingValues;
     };
 
-
-    function getTaskCssClass(task) {
-      if (task.isDone) return 'done';
-      if (isToday(task.dueDate)) return 'dueToday';
-      if (isBeforeToday(task.dueDate)) return 'overdue';
-      return '';
-    }
-
     // -- Date Control --
     const increaseDateBy1Day = () => {
       const newDate = new Date(currentDate.value);
@@ -291,6 +282,13 @@ export default {
     };
 
     // -- Helper --
+    function getTaskCssClass(task) {
+      if (task.isDone) return 'done';
+      if (isToday(task.dueDate)) return 'dueToday';
+      if (isBeforeToday(task.dueDate)) return 'overdue';
+      return '';
+    }
+    
     function formatToLocaleDate(date) {
       if (!date) return '';
       return new Date(date).toLocaleDateString('de-DE');
