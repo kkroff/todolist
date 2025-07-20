@@ -4,13 +4,13 @@ Dieses Projekt ist eine Beispiel-Anwendung zur Verwaltung von Aufgaben (Tasks) m
 
 # Schnellstart
 
-- git clone [<repo-url>](https://github.com/kkroff/todolist) todolist
+- git clone https://github.com/kkroff/todolist todolist
 - cd todolist
 - ddev start
 - ddev composer install
 - ddev npm install
 - ddev import-db --src=.ddev/todolist_db.sql.gz
-- ddev vite
+- ddev vite (oder ddev ssh => npm run dev)
 
 => Frontend erreichbar unter: https://todolist.ddev.site
 
