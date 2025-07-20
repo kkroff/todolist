@@ -12,7 +12,8 @@ Dieses Projekt ist eine Beispiel-Anwendung zur Verwaltung von Aufgaben (Tasks) m
 - ddev import-db --src=.ddev/todolist_db.sql.gz
 - ddev vite (oder ddev ssh => npm run dev)
 
-=> Frontend erreichbar unter: https://todolist.ddev.site
+=> Frontend: https://todolist.ddev.site
+=> Backend: https://todolist.ddev.site/typo3 || Login:admin PW:ToDo%75e
 
 # Technologien
 
