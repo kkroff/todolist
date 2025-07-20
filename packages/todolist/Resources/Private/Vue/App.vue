@@ -43,7 +43,7 @@
       </div>
 
       <div class="col-sm-10 task-list-box">
-        <h4>{{ pendingTasks }} offene ToDos</h4>
+        <h2>{{ pendingTasks }} offene ToDos</h2>
 
         <div
           class="card item-card mt-3"
@@ -67,7 +67,7 @@
               </div>
 
               <div class="flex-grow-1">
-                <p class="fw-semibold mb-1">{{ task.title }}</p>
+                <h4 class="fw-semibold mb-1">{{ task.title }}</h4>
                 <p v-if="task.description" class="mb-1">
                   {{ task.description }}
                 </p>
