@@ -7,3 +7,5 @@ nbproject
 /public/*
 !/public/.htaccess
 node_modules/
+
+.php-cs-fixer.cache
