@@ -27,6 +27,31 @@ Dieses Projekt ist eine Beispiel-Anwendung zur Verwaltung von Aufgaben (Tasks) m
   - JS/SCSS: ESLint, Prettier, Stylelint
   - Testing: Vitest (unit tests)
 
+# Features im Frontend
+
+- Aufgaben anzeigen (offene und erledigte)
+- Neue Aufgaben erstellen (Titel ist Pflicht, Beschreibung und Fälligkeitsdatum optional)
+-	Aufgaben bearbeiten
+- Aufgaben löschen
+- Aufgaben als erledigt markieren
+- Visuelle Hervorhebung von Aufgaben mit heutigem Fälligkeitsdatum + überfällig
+- Anzeige offener Aufgabenanzahl
+- Sortierung nach Fälligkeitsdatum
+- Kommunikation mit TYPO3-Backend via REST-API (Axios)
+- Menu für Zeitsprünge
+- Ansprechendes Design :D
+
+# Codequalität & Tests
+
+| Zweck                 | Technologie        | Befehl zur Ausführung (im Container)     |
+|----------------------|--------------------|-------------------------------------------|
+| JS/TS Linting        | ESLint             | `npm run lint:js`                         |
+| SCSS/CSS Linting     | Stylelint          | `npm run lint:scss`                       |
+| Formatierung         | Prettier           | `npm run format`                          |
+| Frontend Unit Tests  | Vitest             | `npm run test` / `npm run test:watch`     |
+| PHP Linting          | PHP-CS-Fixer       | `composer lint:php` / `composer fix:php`  |
+| PHP Static Analysis  | PHPStan (+ TYPO3)  | `composer phpstan`                        |
+
 # Ausbaumöglichkeiten
 - Accountgebundene ToDo-Listen (z. B. pro Frontend-Benutzer)
 -	Authentifizierung für API-Zugriffe (z. B. über fe_login)
