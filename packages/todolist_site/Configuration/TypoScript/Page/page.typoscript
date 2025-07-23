@@ -28,11 +28,12 @@ page {
     }
 
     meta {
-        viewport = {$page.meta.viewport}
-        robots = {$page.meta.robots}
+        viewport = width=device-width, initial-scale=1
+        viewport.override = width=device-width, initial-scale=1
+        robots = index,follow
         apple-mobile-web-app-capable = {$page.meta.apple-mobile-web-app-capable}
 
-        X-UA-Compatible = {$page.meta.compatible}
+        X-UA-Compatible = IE=edge
         X-UA-Compatible {
             attribute = http-equiv
         }
